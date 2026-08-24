@@ -19,6 +19,20 @@ See `README.md` for install and run instructions when present.
 - Not claimed as production-ready unless README and tests prove it.
 - Mobile smoke / emulator acceptance is separate and toolchain-dependent.
 
+<!-- impeccable:product-schema 1 -->
+
+## Platform
+
+web
+
+## Current product truth
+
+Inferred from the existing code and README; user confirmation pending. This is
+a read-only personal knowledge base backed by local MDX files. The current
+content includes JavaScript Basics, React Hooks, and Design Patterns, with
+categories, tags, related-page links, and detail routes. There is no CMS,
+editing workflow, authentication, or remote search index.
+
 ## Source README excerpt
 
 ```
