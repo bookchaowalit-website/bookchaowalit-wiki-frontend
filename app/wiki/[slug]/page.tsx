@@ -13,6 +13,7 @@ export default async function WikiPageDetail({ params }: PageProps) {
   const { slug } = await params;
   const page = await getWikiPageBySlug(slug);
   if (!page) notFound();
+  const availableSlugs = new Set((await getAllWikiPages()).map((item) => item.slug));
 
   return (
     <main className="wiki-shell detail-shell">
@@ -27,7 +28,7 @@ export default async function WikiPageDetail({ params }: PageProps) {
           <div className="article-tags">{page.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
         </header>
         <div className="article-grid">
-          <aside className="article-rail"><span>READING ORDER</span><strong>01</strong><Link href="/wiki">← All pages</Link>{page.related_pages.length > 0 && <><span className="related-label">RELATED</span>{page.related_pages.map((related) => <Link href={"/wiki/" + related} key={related}>{related} ↗</Link>)}</>}</aside>
+          <aside className="article-rail"><span>READING ORDER</span><strong>01</strong><Link href="/wiki">← All pages</Link>{page.related_pages.length > 0 && <><span className="related-label">RELATED</span>{page.related_pages.map((related) => availableSlugs.has(related) ? <Link href={"/wiki/" + related} key={related}>{related} ↗</Link> : <span className="unavailable-related" key={related}>{related} · not on file</span>)}</>}</aside>
           <div className="wiki-body"><div dangerouslySetInnerHTML={{ __html: page.content }} /></div>
         </div>
       </article>
